@@ -69,6 +69,7 @@ public class ResearchController extends Controller {
         this.medicationService = medicationService;
         this.sessionService = sessionService;
         this.missionTripService = missionTripService; //Andrew Trip Filter
+
     }
 
     public Result indexGet() {
@@ -89,6 +90,7 @@ public class ResearchController extends Controller {
         filterViewModel.setEndDate(dateFormat.format(today.getTime()));
         today.add(Calendar.DAY_OF_MONTH, -120);
         filterViewModel.setStartDate(dateFormat.format(today.getTime()));
+
 
         CurrentUser currentUserSession = sessionService.retrieveCurrentUserSession();
 

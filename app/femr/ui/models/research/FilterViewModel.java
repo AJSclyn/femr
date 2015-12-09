@@ -18,6 +18,7 @@
 */
 package femr.ui.models.research;
 
+import femr.common.models.CityItem;
 
 import femr.common.models.MissionItem;
 import femr.data.models.mysql.MissionCity;
@@ -42,52 +43,6 @@ public class FilterViewModel {
     private List<MissionItem> MissionTrips; //Andrew Trip Filter
     private Integer MissionTripId; //Andrew Trip Filter
 
-    /*
-    public List<ValidationError> validate() {
-
-        List<ValidationError> errors = new ArrayList<ValidationError>();
-
-        if (primaryDataset == null || primaryDataset.length() == 0 ) {
-            errors.add(new ValidationError("primaryDataset", "Choose a primary dataset"));
-        }
-
-        Date startDateObj;
-        Date endDateObj;
-        Date today = new Date();
-        SimpleDateFormat sqlFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        try {
-
-            // Set Start Date to start of day
-            String startParseDate = startDate + " 00:00:00";
-            startDateObj = sqlFormat.parse(startParseDate);
-
-            // Set End Date to end of day
-            String parseEndDate = endDate + " 23:59:59";
-            endDateObj = sqlFormat.parse(parseEndDate);
-
-        }
-        catch(ParseException e){
-
-            startDateObj = new Date();
-            endDateObj = new Date();
-        }
-
-        if( startDateObj.getTime() > endDateObj.getTime() ){
-
-            errors.add(new ValidationError("startDate", "Start Date cannot be after End Date"));
-        }
-        if( startDateObj.getTime() > today.getTime() ){
-
-            errors.add(new ValidationError("startDate", "Start Date cannot be in the future"));
-        }
-        if( endDateObj.getTime() > today.getTime() ){
-
-            errors.add(new ValidationError("endDate", "End Date cannot be in the future"));
-        }
-
-        return errors.isEmpty() ? null : errors;
-    }
-    */
 
     public String getPrimaryDataset() {
         return primaryDataset;

@@ -131,4 +131,20 @@ public interface ISearchService {
      */
     ServiceResponse<List<String>> findDiagnosisForSearch();
 
+    /**
+     * AJ Saclayan Cities
+     * Get string typed by user
+     *
+     * @return
+     */
+    ServiceResponse<List<CityItem>> retrieveCitiesFromQueryString(String citySearchQuery);
+
+    /**
+     * Get all patient information for searching users.
+     *
+     * @return a service response that contains a list of PatientItems
+     * and/or errors if they exist.
+     */
+    ServiceResponse<List<CityItem>> retrieveCitiesForSearch();
+
 }
