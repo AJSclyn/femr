@@ -55,13 +55,15 @@ public class User implements IUser {
     private Boolean passwordReset;
     @Column(name = "notes")
     private String notes;
+    //AJ Saclayan Password Constraints
+    @Column(name = "passwordCreatedDate", nullable = false)
+    private DateTime PasswordCreatedDate;
     @ManyToMany(fetch = FetchType.LAZY, targetEntity = MissionTrip.class)
     @JoinTable(
             name = "mission_trip_users",
             joinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "id")},
             inverseJoinColumns = {@JoinColumn(name = "mission_trip_id", referencedColumnName = "id")})
     private List<IMissionTrip> missionTrips;
-
     @Override
     public int getId() {
         return id;
@@ -167,7 +169,7 @@ public class User implements IUser {
     public void setNotes(String notes) {
         this.notes = notes;
     }
-
+    
     @Override
     public List<IMissionTrip> getMissionTrips() {
         return missionTrips;
@@ -176,5 +178,15 @@ public class User implements IUser {
     @Override
     public void setMissionTrips(List<IMissionTrip> missionTrips) {
         this.missionTrips = missionTrips;
+    }
+
+    @Override
+    public DateTime getPasswordCreatedDate(){
+        return PasswordCreatedDate;
+    }
+
+    @Override
+    public void setPasswordCreatedDate(DateTime date){
+        this.PasswordCreatedDate = date;
     }
 }

@@ -147,5 +147,4 @@ public interface ISearchService {
      */
     ServiceResponse<List<CityItem>> retrieveCitiesForSearch();
 
-
 }
