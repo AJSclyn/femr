@@ -77,4 +77,12 @@ public interface IUser {
 
     void setMissionTrips(List<IMissionTrip> missionTrips);
 
+    DateTime getDateCreated(); //Sam Zanni
+
+    void setDateCreated(DateTime DateCreated); //Sam Zanni
+
+    Integer getCreatedBy(); //Sam Zanni
+
+    void setCreatedBy(Integer CreatedBy); //Sam Zanni
+
 }
