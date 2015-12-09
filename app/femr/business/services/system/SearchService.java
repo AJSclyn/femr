@@ -48,6 +48,7 @@ public class SearchService implements ISearchService {
     private final IRepository<ISystemSetting> systemSettingRepository;
     private final IMissionTripService missionTripService;
     private final IItemModelMapper itemModelMapper;
+    private final IRepository<IPatientPrescriptionReplacement> patientPrescriptionReplacementRepository;
 
     @Inject
     public SearchService(IRepository<IDiagnosis> diagnosisRepository,
@@ -57,6 +58,7 @@ public class SearchService implements ISearchService {
                          IRepository<IPatientPrescription> patientPrescriptionRepository,
                          IRepository<ISystemSetting> systemSettingRepository,
                          IMissionTripService missionTripService,
+                         IRepository<IPatientPrescriptionReplacement> patientPrescriptionReplacementRepository,
                          @Named("identified") IItemModelMapper itemModelMapper) {
 
         this.diagnosisRepository = diagnosisRepository;
@@ -67,6 +69,7 @@ public class SearchService implements ISearchService {
         this.systemSettingRepository = systemSettingRepository;
         this.missionTripService = missionTripService;
         this.itemModelMapper = itemModelMapper;
+        this.patientPrescriptionReplacementRepository = patientPrescriptionReplacementRepository;
     }
 
     /**
@@ -320,11 +323,15 @@ public class SearchService implements ISearchService {
     @Override
     public ServiceResponse<List<PrescriptionItem>> retrieveDispensedPrescriptionItems(int encounterId) {
         ServiceResponse<List<PrescriptionItem>> response = new ServiceResponse<>();
+//        ServiceResponse<List<PrescriptionItem>> replacedMedsResponse = retrieveDispensedPrescriptionItems(encounterId);
+//        List<PrescriptionItem> replacedMedicationItems = replacedMedsResponse.getResponseObject();
+
         ExpressionList<PatientPrescription> query = QueryProvider.getPatientPrescriptionQuery()
                 .fetch("patientEncounter")
                 .where()
                 .eq("encounter_id", encounterId)
                 .ne("user_id_pharmacy", null);
+
         try {
             List<? extends IPatientPrescription> patientPrescriptions = patientPrescriptionRepository.find(query);
             List<PrescriptionItem> prescriptionItems = patientPrescriptions.stream()
@@ -340,7 +347,18 @@ public class SearchService implements ISearchService {
                             pp.getMedication()
                     ))
                     .collect(Collectors.toList());
+            //Loop through each prescription dispensed, query to find if replacementId returns not null so there is a replacement, if it does,
+            // take the replacementId and set that to the originalPrescription.
+            for(PrescriptionItem prescriptionItem : prescriptionItems){
+                ExpressionList<PatientPrescriptionReplacement> replacementQuery = QueryProvider.getPatientPrescriptionReplacementQuery()
+                        .where()
+                        .eq("patient_prescription_id_replacement", prescriptionItem.getId());
+                IPatientPrescriptionReplacement replacementResult = patientPrescriptionReplacementRepository.findOne(replacementQuery);
 
+                //There is a replacement!
+                if(replacementResult != null)
+                    prescriptionItem.setOriginalMedicationName(replacementResult.getOriginalPrescription().getMedication().getName());
+            }
             response.setResponseObject(prescriptionItems);
         } catch (Exception ex) {
             response.addError("exception", ex.getMessage());
@@ -628,4 +646,5 @@ public class SearchService implements ISearchService {
         ISystemSetting isMetric = systemSettingRepository.findOne(query);
         return isMetric.isActive();
     }
+
 }
