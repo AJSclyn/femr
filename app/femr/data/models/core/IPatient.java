@@ -69,4 +69,9 @@ public interface IPatient {
     DateTime getIsDeleted();
 
     void setIsDeleted(DateTime isDeleted);
+
+    //AJ Saclayan Unique ID
+    String getPatientId();
+
+    void setPatientId(String uniqueId);
 }

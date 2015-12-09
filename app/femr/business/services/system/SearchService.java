@@ -125,7 +125,8 @@ public class SearchService implements ISearchService {
                     patientHeightInches,
                     patientWeight,
                     pathToPhoto,
-                    photoId
+                    photoId,
+                    savedPatient.getPatientId()
             );
 
             //TODO: why is this being repeated?
@@ -188,7 +189,8 @@ public class SearchService implements ISearchService {
                     patientHeightInches,
                     patientWeight,
                     pathToPhoto,
-                    photoId
+                    photoId,
+                    patient.getPatientId()
             );
 
             // If metric setting enabled convert response patientItem to metric
@@ -493,7 +495,8 @@ public class SearchService implements ISearchService {
                         null,
                         null,
                         pathToPhoto,
-                        photoId
+                        photoId,
+                        patient.getPatientId()
                 ));
             }
             response.setResponseObject(patientItems);
@@ -587,7 +590,8 @@ public class SearchService implements ISearchService {
                         null,
                         null,
                         pathToPhoto,
-                        photoId
+                        photoId,
+                        patient.getPatientId()
                 );
 
                 if (patient.getPhoto() != null) {

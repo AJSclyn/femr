@@ -54,6 +54,9 @@ public class Patient implements IPatient {
     @Column(name = "isDeleted", nullable = true)
     private DateTime isDeleted;
 
+    @Column(name = "patientId", nullable = true)
+    private String patientId;
+
     @Override
     public int getId() {
         return id;
@@ -164,4 +167,13 @@ public class Patient implements IPatient {
         this.isDeleted = isDeleted;
     }
 
+    @Override
+    public String getPatientId() {
+        return patientId;
+    }
+
+    @Override
+    public void setPatientId(String patientId) {
+        this.patientId = patientId;
+    }
 }
