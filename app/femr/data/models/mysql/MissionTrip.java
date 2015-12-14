@@ -50,6 +50,8 @@ public class MissionTrip implements IMissionTrip {
             joinColumns = {@JoinColumn(name = "mission_trip_id", referencedColumnName = "id")},
             inverseJoinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "id")})
     private List<IUser> users;
+    @Column(name = "trip_acronym")
+    private String tripAcronym;
 
     @Override
     public int getId() {
@@ -123,5 +125,15 @@ public class MissionTrip implements IMissionTrip {
                 iterator.remove();
         }
 
+    }
+
+    @Override
+    public String getTripAcronym() {
+        return tripAcronym;
+    }
+
+    @Override
+    public void setTripAcronym(String tripAcronym) {
+        this.tripAcronym = tripAcronym;
     }
 }

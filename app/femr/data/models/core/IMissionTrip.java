@@ -47,4 +47,8 @@ public interface IMissionTrip {
     void addUser(IUser user);
 
     void removeUser(int userId);
+
+    String getTripAcronym();
+
+    void setTripAcronym(String tripAcronym);
 }

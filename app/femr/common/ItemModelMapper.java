@@ -106,7 +106,8 @@ public class ItemModelMapper implements IItemModelMapper {
         missionItem.setTeamLocation(missionTeam.getLocation());
         missionItem.setTeamDescription(missionTeam.getDescription());
         missionItem.setMissionTrips(missionTripItems);
-
+        if(missionTeam.getTeamAcronym() != null)
+            missionItem.setTeamAcronym(missionTeam.getTeamAcronym());
         return missionItem;
     }
 
@@ -129,7 +130,8 @@ public class ItemModelMapper implements IItemModelMapper {
         missionTripItem.setTripEndDate(missionTrip.getEndDate());
         missionTripItem.setFriendlyTripEndDate(dateUtils.getFriendlyDate(missionTrip.getEndDate()));
         missionTripItem.setTeamName(missionTrip.getMissionTeam().getName());
-
+        if(missionTrip.getTripAcronym() != null)
+            missionTripItem.setTripAcronym(missionTrip.getTripAcronym());
         return missionTripItem;
     }
 

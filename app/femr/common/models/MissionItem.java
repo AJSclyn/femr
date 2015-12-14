@@ -30,6 +30,7 @@ public class MissionItem {
     private String teamLocation;
     private String teamDescription;
     private List<MissionTripItem> missionTrips;
+    private String teamAcronym;
 
     public MissionItem() {
         this.missionTrips = new ArrayList<>();
@@ -70,5 +71,13 @@ public class MissionItem {
     public void addMissionTrip(MissionTripItem missionTripItem) {
 
         this.missionTrips.add(missionTripItem);
+    }
+
+    public String getTeamAcronym() {
+        return teamAcronym;
+    }
+
+    public void setTeamAcronym(String teamAcronym) {
+        this.teamName = teamAcronym;
     }
 }

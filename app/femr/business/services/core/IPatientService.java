@@ -59,4 +59,11 @@ public interface IPatientService {
      * and/or errors if they exist.
      */
     ServiceResponse<PatientItem> deletePatient(int patientId);
+
+    /**
+     * Creates logic to create patientId
+     * @return a String of the patient Id
+     * and/or errors if they exist.
+     */
+    String createPatientId(PatientItem patient);
 }
