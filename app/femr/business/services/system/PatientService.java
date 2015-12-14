@@ -28,9 +28,11 @@ import com.avaje.ebean.Query;
 import com.google.inject.Inject;
 import com.google.inject.name.Named;
 import femr.business.helpers.QueryProvider;
+import femr.business.services.core.IMissionTripService;
 import femr.business.services.core.IPatientService;
 import femr.common.IItemModelMapper;
 import femr.common.dtos.ServiceResponse;
+import femr.common.models.MissionTripItem;
 import femr.common.models.PatientItem;
 import femr.data.IDataModelMapper;
 import femr.data.daos.IRepository;
@@ -50,17 +52,19 @@ public class PatientService implements IPatientService {
     private final IRepository<IPatientAgeClassification> patientAgeClassificationRepository;
     private final IDataModelMapper dataModelMapper;
     private final IItemModelMapper itemModelMapper;
-
+    private final IMissionTripService missionTripService;
     @Inject
     public PatientService(IRepository<IPatient> patientRepository,
                           IRepository<IPatientAgeClassification> patientAgeClassificationRepository,
                           IDataModelMapper dataModelMapper,
-                          @Named("identified") IItemModelMapper itemModelMapper) {
+                          @Named("identified") IItemModelMapper itemModelMapper,
+                          IMissionTripService missionTripService) {
 
         this.patientRepository = patientRepository;
         this.patientAgeClassificationRepository = patientAgeClassificationRepository;
         this.dataModelMapper = dataModelMapper;
         this.itemModelMapper = itemModelMapper;
+        this.missionTripService = missionTripService;
     }
 
     /**
@@ -160,7 +164,8 @@ public class PatientService implements IPatientService {
             response.addError("", "no patient received");
             return response;
         }
-
+        String uniqueId;
+        uniqueId = createPatientId(patient);
         try {
             IPatient newPatient = dataModelMapper.createPatient(patient.getUserId(), patient.getFirstName(), patient.getLastName(), patient.getBirth(), patient.getSex(), patient.getAddress(), patient.getCity(), patient.getPhotoId());
             newPatient = patientRepository.create(newPatient);
@@ -218,5 +223,53 @@ public class PatientService implements IPatientService {
         }
 
         return response;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String createPatientId(PatientItem patient){
+        //AJ Saclayan UniqueId
+        //For Mission ID
+        String uniqueId = null;
+        String tripAcronym;
+        String teamAcronym;
+        ServiceResponse<List<MissionTripItem>> missionTripInfo;
+        missionTripInfo = missionTripService.retrieveAllTripInformationByUserId(patient.getUserId());
+        if (missionTripInfo.hasErrors()) {
+            throw new RuntimeException();
+        }
+        List<MissionTripItem> missionTripItem = missionTripInfo.getResponseObject();
+
+        teamAcronym = missionTripItem.get(0).getTeamName().substring(0,3);
+        tripAcronym = missionTripItem.get(0).getTripAcronym();
+
+        //Create unique Id
+        Integer counter = 0;
+        boolean isUnique = false;
+        while(isUnique == false) {
+            uniqueId = teamAcronym.toString() +
+                    tripAcronym.toUpperCase() +
+                    patient.getFirstName().substring(0, 1).toUpperCase() +
+                    patient.getLastName().substring(0, 1).toUpperCase() +
+                    patient.getCity().substring(0,2).toUpperCase() +
+                    patient.getBirth().toString().substring(patient.getBirth().toString().length() - 2) +
+                    String.format("%02d", counter);
+
+            ExpressionList<Patient> patientQuery = QueryProvider.getPatientQuery()
+                    .where()
+                    .eq("patientId", uniqueId);
+            IPatient patientItem = patientRepository.findOne(patientQuery);
+
+            //If null then it's a unique id!
+            if (patientItem != null) {
+                counter++;
+            }
+            else
+                isUnique = true;
+        }
+
+        return uniqueId;
     }
 }

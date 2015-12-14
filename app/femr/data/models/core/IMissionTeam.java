@@ -40,4 +40,8 @@ public interface IMissionTeam {
     List<MissionTrip> getMissionTrips();
 
     void setMissionTrips(List<MissionTrip> missionTrips);
+
+    String getTeamAcronym();
+
+    void setTeamAcronym(String teamAcronym);
 }

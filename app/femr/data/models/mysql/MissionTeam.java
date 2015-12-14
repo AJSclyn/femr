@@ -38,6 +38,8 @@ public class MissionTeam implements IMissionTeam {
     @OneToMany(fetch = FetchType.LAZY,
             mappedBy = "missionTeam")
     private List<MissionTrip> missionTrips;
+    @Column(name = "team_acronym", unique = true, nullable = false)
+    private String teamAcronym;
 
     @Override
     public int getId() {
@@ -82,5 +84,15 @@ public class MissionTeam implements IMissionTeam {
     @Override
     public void setMissionTrips(List<MissionTrip> missionTrips) {
         this.missionTrips = missionTrips;
+    }
+
+    @Override
+    public String getTeamAcronym() {
+        return teamAcronym;
+    }
+
+    @Override
+    public void setTeamAcronym(String teamAcronym) {
+        this.teamAcronym = teamAcronym;
     }
 }
