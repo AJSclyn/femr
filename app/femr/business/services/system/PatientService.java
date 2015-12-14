@@ -137,7 +137,8 @@ public class PatientService implements IPatientService {
                     null,
                     null,
                     photoPath,
-                    photoId);
+                    photoId,
+                    null);
             response.setResponseObject(patientItem);
 
         } catch (Exception ex) {
@@ -160,7 +161,7 @@ public class PatientService implements IPatientService {
         String uniqueId;
         uniqueId = createPatientId(patient);
         try {
-            IPatient newPatient = dataModelMapper.createPatient(patient.getUserId(), patient.getFirstName(), patient.getLastName(), patient.getBirth(), patient.getSex(), patient.getAddress(), patient.getCity(), patient.getPhotoId());
+            IPatient newPatient = dataModelMapper.createPatient(patient.getUserId(), patient.getFirstName(), patient.getLastName(), patient.getBirth(), patient.getSex(), patient.getAddress(), patient.getCity(), patient.getPhotoId(), uniqueId);
             newPatient = patientRepository.create(newPatient);
             String photoPath = null;
             Integer photoId = null;
@@ -182,7 +183,8 @@ public class PatientService implements IPatientService {
                             null,
                             null,
                             photoPath,
-                            photoId)
+                            photoId,
+                            newPatient.getPatientId())
             );
         } catch (Exception ex) {
             response.addError("exception", ex.getMessage());
@@ -240,7 +242,7 @@ public class PatientService implements IPatientService {
         Integer counter = 0;
         boolean isUnique = false;
         while(isUnique == false) {
-            uniqueId = teamAcronym.toString() +
+            uniqueId = teamAcronym.toString().toUpperCase() +
                     tripAcronym.toUpperCase() +
                     patient.getFirstName().substring(0, 1).toUpperCase() +
                     patient.getLastName().substring(0, 1).toUpperCase() +

@@ -118,7 +118,6 @@ public class HistoryController extends Controller {
         }
         viewModel.setPatientEncounterItems(patientEncounterItems);
 
-
         return ok(indexPatient.render(currentUser, error, viewModel, patientEncounterItems));
     }
 

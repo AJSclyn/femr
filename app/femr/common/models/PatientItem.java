@@ -39,7 +39,7 @@ public class PatientItem {
     private Integer heightFeet;
     private Integer heightInches;
     private Float weight;
-
+    private String patientId;
 
     public PatientItem(){
         //default empty values
@@ -174,4 +174,13 @@ public class PatientItem {
     public void setFriendlyDateOfBirth(String friendlyDateOfBirth) {
         this.friendlyDateOfBirth = friendlyDateOfBirth;
     }
+
+    public String getPatientId() {
+        return patientId;
+    }
+
+    public void setPatientId(String patientId) {
+        this.patientId= patientId;
+    }
+
 }
