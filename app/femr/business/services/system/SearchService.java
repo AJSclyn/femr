@@ -132,6 +132,7 @@ public class SearchService implements ISearchService {
                     patientWeight,
                     pathToPhoto,
                     photoId,
+                    savedPatient.getPatientId(),
                     ageClassification
             );
 
@@ -205,6 +206,7 @@ public class SearchService implements ISearchService {
                     patientWeight,
                     pathToPhoto,
                     photoId,
+                    patient.getPatientId(),
                     ageClassification
             );
 
@@ -539,6 +541,7 @@ public class SearchService implements ISearchService {
                         null,
                         pathToPhoto,
                         photoId,
+                        patient.getPatientId(),
                         null
                 ));
             }
@@ -646,6 +649,7 @@ public class SearchService implements ISearchService {
                         null,
                         pathToPhoto,
                         photoId,
+                        patient.getPatientId(),
                         null
                 );
 

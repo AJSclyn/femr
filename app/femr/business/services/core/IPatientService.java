@@ -58,7 +58,7 @@ public interface IPatientService {
      * @return a service response that contains a PatientItem representing that the patient was deleted
      * and/or errors if they exist.
      */
-    ServiceResponse<PatientItem> deletePatient(int patientId);
+    ServiceResponse<PatientItem> deletePatient(int patientId, int deleteByUserID);
 
     /**
      * Creates logic to create patientId
@@ -66,5 +66,5 @@ public interface IPatientService {
      * and/or errors if they exist.
      */
     String createPatientId(PatientItem patient);
-    ServiceResponse<PatientItem> deletePatient(int patientId, int deleteByUserID);
+
 }

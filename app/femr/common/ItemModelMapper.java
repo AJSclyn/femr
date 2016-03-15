@@ -170,6 +170,7 @@ public class ItemModelMapper implements IItemModelMapper {
                                                 Float weight,
                                                 String pathToPatientPhoto,
                                                 Integer photoId,
+                                                String patientId,
                                                 String ageClassification) {
 
         if (StringUtils.isNullOrWhiteSpace(firstName) ||
@@ -221,6 +222,9 @@ public class ItemModelMapper implements IItemModelMapper {
 
         if (weight != null)
             patientItem.setWeight(weight);
+
+        if (patientId != null)
+            patientItem.setPatientId(patientId);
 
         return patientItem;
     }

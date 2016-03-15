@@ -43,6 +43,8 @@ public class PatientItem {
     private Integer heightInchesDual;
 
     private Float weight;
+    private String patientId;
+
     //added for femr-136 - dual unit display
     private Float weightDual;
 
@@ -220,4 +222,8 @@ public class PatientItem {
     public void setMonthsOld(Integer monthsOld) {
         this.monthsOld = monthsOld;
     }
+
+    public String getPatientId(){return patientId;}
+
+    public void setPatientId(String patientId){this.patientId = patientId;}
 }
