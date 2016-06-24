@@ -18,20 +18,26 @@
 
     @tripsMenu()
 
-    @for(messageIndex <- 1 to viewModel.getMessages.size){
-        <p>@viewModel.getMessages.get(messageIndex - 1)</p>
-    }
+
 
     @helper.form(action = TripController.teamsPost()) {
 
         <div id="addTeamWrap">
             <h1>Add Team:</h1>
+            @for(messageIndex <- 1 to viewModel.getMessages.size){
+                <p class="createTripError">@viewModel.getMessages.get(messageIndex - 1)</p>
+            }
             <div>
                 <label>Team Name<span class="red bold">*</span>:
-                    <input class="fInput" type="text" name="newTeamName"/>
+                    <input class="fInput" type="text" name="newTeamName" required/>
                 </label>
             </div>
 
+            <div>
+                <label>Team Acronym<span class="red bold">*</span>:
+                    <input class="fInput" type="text" name="newTeamAcronym" required/>
+                </label>
+            </div>
             <div>
                 <label>Team Location:
                     <input class="fInput" type="text" name="newTeamLocation"/>

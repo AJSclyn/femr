@@ -328,7 +328,15 @@ public class MissionTripService implements IMissionTripService {
         if (teamItem == null || StringUtils.isNullOrWhiteSpace(teamItem.getName())) {
 
             response.addError("", "team must have a name");
-        } else {
+        }
+        if(StringUtils.isNullOrWhiteSpace(teamItem.getTeamAcronym())){
+
+            response.addError(response.getErrors().toString(), "team must have an acronym");
+        } else if (teamItem.getTeamAcronym().length() != 3) {
+
+            response.addError("", "team acronym must be 3 characters");
+        }
+        if(!response.hasErrors()) {
 
             try {
 

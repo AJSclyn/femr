@@ -24,6 +24,7 @@ public class TripViewModelPost {
 
     //add team
     private String newTeamName;
+    private String newTeamAcronym;
     private String newTeamLocation;
     private String newTeamDescription;
 
@@ -46,6 +47,10 @@ public class TripViewModelPost {
     public void setNewTeamName(String newTeamName) {
         this.newTeamName = newTeamName;
     }
+
+    public String getNewTeamAcronym() {return newTeamAcronym; }
+
+    public void setNewTeamAcronym(String newTeamAcronym) { this.newTeamAcronym = newTeamAcronym; }
 
     public String getNewTeamLocation() {
         return newTeamLocation;

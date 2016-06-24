@@ -204,6 +204,7 @@ public class TripController extends Controller {
 
         TeamItem teamItem = new TeamItem();
         teamItem.setName(tripViewModelPost.getNewTeamName());
+        teamItem.setTeamAcronym(tripViewModelPost.getNewTeamAcronym());
         teamItem.setLocation(tripViewModelPost.getNewTeamLocation());
         teamItem.setDescription(tripViewModelPost.getNewTeamDescription());
         ServiceResponse<TeamItem> newTeamItemServiceResponse = missionTripService.createNewTeam(teamItem);

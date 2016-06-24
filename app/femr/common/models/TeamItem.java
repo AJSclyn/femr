@@ -4,6 +4,7 @@ public class TeamItem {
     private String name;
     private String description;
     private String location;
+    private String teamAcronym;
 
     public String getName() {
         return name;
@@ -28,4 +29,8 @@ public class TeamItem {
     public void setLocation(String location) {
         this.location = location;
     }
+
+    public String getTeamAcronym(){return teamAcronym; }
+
+    public void setTeamAcronym(String teamAcronym) {this.teamAcronym = teamAcronym; }
 }
