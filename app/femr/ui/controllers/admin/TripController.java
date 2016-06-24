@@ -25,7 +25,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Security.Authenticated(FEMRAuthenticated.class)
-@AllowedRoles({Roles.ADMINISTRATOR})
+@AllowedRoles({Roles.ADMINISTRATOR, Roles.SUPERUSER})
 public class TripController extends Controller {
 
     private Form<TripViewModelPost> tripViewModelPostForm = Form.form(TripViewModelPost.class);
