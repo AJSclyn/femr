@@ -310,7 +310,7 @@ public class DataModelMapper implements IDataModelMapper{
      * {@inheritDoc}
      */
     @Override
-    public IMissionTeam createMissionTeam(String name, String location, String description) {
+    public IMissionTeam createMissionTeam(String name, String nameAcronym, String location, String description) {
 
         if (StringUtils.isNullOrWhiteSpace(name)) {
 
@@ -320,6 +320,7 @@ public class DataModelMapper implements IDataModelMapper{
         IMissionTeam missionTeam = missionTeamProvider.get();
 
         missionTeam.setName(name);
+        missionTeam.setTeamAcronym(nameAcronym);
         missionTeam.setLocation(location);
         missionTeam.setDescription(description);
 

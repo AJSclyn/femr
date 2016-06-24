@@ -340,9 +340,9 @@ public class MissionTripService implements IMissionTripService {
 
             try {
 
-                IMissionTeam missionTeam = dataModelMapper.createMissionTeam(teamItem.getName(), teamItem.getLocation(), teamItem.getDescription());
+                IMissionTeam missionTeam = dataModelMapper.createMissionTeam(teamItem.getName(), teamItem.getTeamAcronym(), teamItem.getLocation(), teamItem.getDescription());
                 missionTeam = missionTeamRepository.create(missionTeam);
-                response.setResponseObject(itemModelMapper.createTeamItem(missionTeam.getName(), missionTeam.getLocation(), missionTeam.getDescription()));
+                response.setResponseObject(itemModelMapper.createTeamItem(missionTeam.getName(), teamItem.getTeamAcronym(), missionTeam.getLocation(), missionTeam.getDescription()));
             } catch (Exception ex) {
 
                 response.addError("", ex.getMessage());

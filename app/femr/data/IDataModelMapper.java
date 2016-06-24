@@ -115,11 +115,12 @@ public interface IDataModelMapper {
      * Generate and provide an implementation of IMissionTeam.
      *
      * @param name        the team name, not null
+     * @param nameAcronym the team name Acronym, not null
      * @param location    where the team is based out of, may be null
      * @param description a description of the team, may be null
      * @return an implementation of IMissionTeam or null if processing fails
      */
-    IMissionTeam createMissionTeam(String name, String location, String description);
+    IMissionTeam createMissionTeam(String name, String nameAcronym, String location, String description);
 
     /**
      * Generate and provide an implementation of IMissionTrip.

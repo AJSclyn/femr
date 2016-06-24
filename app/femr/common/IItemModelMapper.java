@@ -226,11 +226,12 @@ public interface IItemModelMapper {
      * Generate and provide an instance of TeamItem.
      *
      * @param name        name of the team, not null
+     * @param nameAcronym name of the team acronym, not null
      * @param location    where the team is based out of, may be null
      * @param description a description of the team, may be null
      * @return a new team item or null if processing fails
      */
-    TeamItem createTeamItem(String name, String location, String description);
+    TeamItem createTeamItem(String name, String nameAcronym, String location, String description);
 
     /**
      * Generate and provide an instance of TripItem.

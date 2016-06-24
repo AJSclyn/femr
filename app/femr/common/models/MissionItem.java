@@ -78,6 +78,6 @@ public class MissionItem {
     }
 
     public void setTeamAcronym(String teamAcronym) {
-        this.teamName = teamAcronym;
+        this.teamAcronym = teamAcronym;
     }
 }

@@ -496,7 +496,7 @@ public class ItemModelMapper implements IItemModelMapper {
      * {@inheritDoc}
      */
     @Override
-    public TeamItem createTeamItem(String name, String location, String description) {
+    public TeamItem createTeamItem(String name, String nameAcronym, String location, String description) {
 
         if (StringUtils.isNullOrWhiteSpace(name)) {
 
@@ -506,6 +506,7 @@ public class ItemModelMapper implements IItemModelMapper {
         TeamItem teamItem = new TeamItem();
 
         teamItem.setName(name);
+        teamItem.setTeamAcronym(nameAcronym);
         teamItem.setLocation(location);
         teamItem.setDescription(description);
 
