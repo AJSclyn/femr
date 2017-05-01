@@ -119,10 +119,9 @@ public class MockDataModelMapper implements IDataModelMapper{
     }
 
     @Override
-    public IPatientPrescription createPatientPrescription(int amount, int medicationId, Integer medicationAdministrationId, int userId, int encounterId, DateTime dateDispensed, boolean isCounseled) {
+    public IPatientPrescription createPatientPrescription(Integer amount, int medicationId, Integer medicationAdministrationId, int userId, int encounterId, DateTime dateDispensed, boolean isCounseled) {
         return null;
     }
-
     @Override
     public IPatientPrescriptionReplacement createPatientPrescriptionReplacement(int originalId, int replacementId, int reasonId) {
         return null;
